@@ -23,10 +23,9 @@
 │── /services
 │   ├── authService.js    # Handles authentication logic (JWT, session management)
 │── /public               # Store static files (optional)
-│── /views                # Store template files (if applicable)
 │── .env                  # Environment variables (PORT, MongoDB URI, JWT secret, etc.)
 │── .gitignore            # Ignore node_modules, .env, etc.
-│── server.js             # Main entry point of the application
+│── app.js             # Main entry point of the application
 │── package.json          # Project dependencies and scripts
 
 Explanation of Key Files:

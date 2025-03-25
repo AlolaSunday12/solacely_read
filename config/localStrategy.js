@@ -5,18 +5,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 
-// Serialize the user into the session (store the user ID in the session)
-passport.serializeUser((user, done) => {
-    done(null, user.id);
-});
-
-// Deserialize the user from the session (retrieve user by ID)
-passport.deserializeUser((id, done) => {
-    User.findByPk(id).then((user) => {
-        done(null, user);
-    }).catch((err) => console.error('Error deserializing user:', err));
-});
-
 // Passport LocalStrategy for authentication
 passport.use(new LocalStrategy({
   usernameField: 'email',

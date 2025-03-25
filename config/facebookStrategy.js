@@ -3,26 +3,14 @@ const router = express.Router();
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const User = require('../models/user');
-const keys = require('./keys');
+//const keys = require('./keys');
 
-passport.serializeUser((user, done) => {
-    done (null, user.id);
-});
-
-passport.deserializeUser((id, done) => {
-    User.findByPk(id)
-    .then((user) => {
-        done(null, user)
-    }).catch((err) => {
-        console.error('Error occurred while deserializing:', err)
-        done(err, null);
-     })
-});
+require('dotenv').config();
 
 passport.use(new FacebookStrategy({
     callbackURL: 'http://localhost:5000/auth/facebook/redirect',
-    clientID: keys.facebook.clientID,
-    clientSecret: keys.facebook.clientSecret,
+    clientID: process.env.FACEBOOK_ID,
+    clientSecret: process.env.FACEBOOK_SECRET,
     profileFields: ['id', 'displayName', 'photos', 'email']
 }, async (accessToken, refreshToken, profile, done) => {
     try {
@@ -45,5 +33,3 @@ passport.use(new FacebookStrategy({
         done(err, null)
     }
 }));
-
-module.exports = router;

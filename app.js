@@ -2,10 +2,9 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const cors = require('cors');
-//const keys = require('./config/keys');  // Replace with your actual keys file
 const sequelize = require('./config/db');  // Sequelize instance
 const authRoute = require('./routes/authRoutes');
-//const authCheck = require('../middleware/authMiddleware')
+const userRoutes = require('./routes/userRoutes');
 require('./config/googleStrategy');  // Passport Google setup
 require('./config/facebookStrategy');
 require('./config/localStrategy');
@@ -39,6 +38,7 @@ app.use(passport.session());
 // Routes
 app.use('/auth', authRoute);
 app.use('/profile', authRoute);
+app.use('/user', userRoutes);
 
 // Test route to verify everything works
 app.get('/', (req, res) => {

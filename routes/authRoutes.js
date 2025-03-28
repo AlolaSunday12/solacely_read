@@ -6,7 +6,7 @@ const router = express.Router();
 
 // Local authentication
 router.post('/signup', authController.signup);
-router.post('/login', authCheck, authController.login);
+router.post('/login', authController.login);
 router.post('/logout', authController.logout);
 
 // OTP and Password Reset Routes

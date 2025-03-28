@@ -26,6 +26,7 @@ passport.use(new LocalStrategy({
     if (!isMatch) {
       return done(null, false, { message: 'Invalid credentials.' });
     }
+    console.log("USER AUTHENTICATED:", user);
 
     // If everything is fine, return the user
     return done(null, user);

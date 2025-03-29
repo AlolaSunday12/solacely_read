@@ -7,6 +7,7 @@ const authRoute = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const authCheck = require('./middleware/authMiddleware')
 const User = require('./models/user')
+const path = require('path');
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 //const { sequelize } = require('./models');
 require('./config/googleStrategy');  // Passport Google setup
@@ -29,6 +30,7 @@ app.use(cors({
 // Body parser setup
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Session middleware (must come before passport session middleware)
 const sessionStore = new SequelizeStore({ db: sequelize });

@@ -7,6 +7,7 @@ const authRoute = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const authCheck = require('./middleware/authMiddleware')
 const User = require('./models/user')
+const multer = require('multer');
 const path = require('path');
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 //const { sequelize } = require('./models');
@@ -18,7 +19,6 @@ require('dotenv').config();
 
 const app = express();
 
-//app.use(authCheck)
 
 // CORS configuration
 const allowedOrigins = ["http://localhost:3000", "http://localhost:5000"];
@@ -30,10 +30,14 @@ app.use(cors({
 // Body parser setup
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/Public/uploads', express.static(path.join(__dirname, '/Public/uploads')));
 
 // Session middleware (must come before passport session middleware)
-const sessionStore = new SequelizeStore({ db: sequelize });
+const sessionStore = new SequelizeStore({
+  db: sequelize,
+  checkExpirationInterval: 15 * 60 * 1000, // Clean expired sessions every 15 min
+  expiration: 30 * 60 * 1000 // Sessions expire in 30 min
+});
 app.use(session({
   secret: process.env.SESSION_KEY,
   resave: false,

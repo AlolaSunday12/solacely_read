@@ -1,5 +1,4 @@
 const nodemailer = require('nodemailer');
-//const keys = require('./keys')
 require('dotenv').config();
 
 exports.sendOTPEmail = async (email, otp) => {

@@ -8,11 +8,11 @@ const path = require('path');
 const router = express.Router();
 
 
-router.put('/updateProfile', authCheck, upload.single('thumbnail'), userController.updateProfile); // ✅ Use userController.updateProfile
-
-router.get('/getUser', authCheck, userController.getUserProfile);
+router.put('/updateProfile/:id', authCheck, upload.single('thumbnail'), userController.updateProfile); // ✅ Use userController.updateProfile
 router.get('/getAllUsers', authCheck, userController.getAllUsers);
-router.delete('/deleteUser/:id', authCheck, userController.deleteUser);
+router.get('/Profile', authCheck, userController.getUserProfile);
+router.get('/:id',authCheck, userController.getUserById);
+router.delete('/:id', authCheck, userController.deleteUser);
 
 // Protect the home route by ensuring the user is authenticated
 router.get('/', authCheck, (req, res) => {

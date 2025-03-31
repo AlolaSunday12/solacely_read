@@ -1,34 +1,34 @@
-## start the app
+# start the app
 npm start
 
-## Testing
+# Testing
 # Regiater route
 POST: http://localhost:5000/auth/signup
-#       username,
-#       email,
-#       password
+##       username,
+##       email,
+##       password
 
 # Login route
 POST: http://localhost:5000/auth/login
-#     email,
-#      password
+##     email,
+##      password
 
 # Logout route
 POST: http://localhost:5000/auth/logout
 
 # Send OTP route
 POST: http://localhost:5000/auth/send-otp
-#     "email": "user@example.com"
+##     "email": "user@example.com"
 
 # Verify OTP route
 POST: http://localhost:5000/auth/verify-otp
-#   "email": "alolasj@gmail.com",
-#   "otp": "311733"
+##   "email": "alolasj@gmail.com",
+##   "otp": "311733"
 
 # Reset password route
 POST: http://localhost:5000/auth/reset-password
-#   "email": "alolasj@gmail.com",
-#   "newPassword": "123455"
+##  "email": "alolasj@gmail.com",
+##   "newPassword": "123455"
 
 # Update a profile route
 PUT: http://localhost:5000/user/updateProfile

@@ -1,3 +1,51 @@
+## start the app
+npm start
+
+## Testing
+# Regiater route
+POST: http://localhost:5000/auth/signup
+       username,
+       email,
+       password
+
+# Login route
+POST: http://localhost:5000/auth/login
+      email,
+      password
+
+# Logout route
+POST: http://localhost:5000/auth/logout
+
+# Send OTP route
+POST: http://localhost:5000/auth/send-otp
+      "email": "user@example.com"
+
+# Verify OTP route
+POST: http://localhost:5000/auth/verify-otp
+    "email": "alolasj@gmail.com",
+    "otp": "311733"
+
+# Reset password route
+POST: http://localhost:5000/auth/reset-password
+    "email": "alolasj@gmail.com",
+    "newPassword": "123455"
+
+# Update a profile route
+PUT: http://localhost:5000/user/updateProfile
+
+# Get all users route
+GET: http://localhost:5000/user/getAllUsers
+
+# Get user profile by ID route
+GET: http://localhost:5000/user/profile/:id
+
+# Get user by ID route
+GET: http://localhost:5000/user/:id
+
+# Delete user by ID route
+DELETE: http://localhost:5000/user/:id
+
+
 /project-root
 │── /config
 │   ├── passport.js       # Passport middleware configuration

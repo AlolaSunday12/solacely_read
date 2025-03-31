@@ -8,7 +8,7 @@ const path = require('path');
 const router = express.Router();
 
 
-router.put('/updateProfile/:id', authCheck, upload.single('thumbnail'), userController.updateProfile); // ✅ Use userController.updateProfile
+router.put('/updateProfile/:id', authCheck, upload.single('thumbnail'), userController.updateProfile);
 router.get('/getAllUsers', authCheck, userController.getAllUsers);
 router.get('/Profile', authCheck, userController.getUserProfile);
 router.get('/:id',authCheck, userController.getUserById);

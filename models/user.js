@@ -55,6 +55,11 @@ const User = sequelize.define('User', {
     type: DataTypes.DATE, // Store OTP expiration time
     allowNull: true,
   },
+  isAdmin: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false, // Set default to false
+  }
 
 }, {
   tableName: 'users', // Specify the table name

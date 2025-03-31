@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs')
 //const { sendOTPEmail } = require('../config/otp');
 const crypto = require('crypto');
 const authCheck = require('../middleware/authMiddleware')
-const sendOTPEmail = require('../utils/sendEmail')
+const {sendOTPEmail} = require('../utils/sendEmail')
 
 // Signup route
 exports.signup = async (req, res) => {
@@ -56,13 +56,14 @@ exports.login = (req, res, next) => {
         req.logIn(user, (err) => {
             if (err) return res.status(500).json({ error: 'Login failed' });
 
+            req.session.user = {
+                id: user.id,
+                isAdmin: user.isAdmin
+            };
+
             return res.json({
                 message: 'Login successful',
-                user: {
-                    id: user.id,
-                    username: user.username,
-                    email: user.email
-                }
+                user: req.session.user
             });
         });
     })(req, res, next);

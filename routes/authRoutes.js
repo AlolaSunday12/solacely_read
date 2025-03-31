@@ -12,6 +12,7 @@ router.post('/logout', authController.logout);
 
 // OTP and Password Reset Routes
 router.post('/send-otp', authController.sendOTP);
+router.post('/resend-otp', authController.resendOTP);
 router.post('/verify-otp', authController.verifyOTP);
 router.post('/reset-password', authController.resetPassword);
 

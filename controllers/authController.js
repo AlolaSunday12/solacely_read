@@ -115,6 +115,28 @@ exports.sendOTP = async (req, res) => {
     res.json({ message: 'OTP sent to your email for password reset' });
 };
 
+exports.resendOTP = async (req, res) => {
+    const { email } = req.body;
+
+    // Check if user exists
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Generate a new OTP and expiry time (10 minutes)
+    const otp = generateOTP();
+    const otpExpires = new Date(Date.now() + 10 * 60 * 1000);
+
+    // Save new OTP to user record
+    await user.update({ otp, otpExpires });
+
+    // Send OTP via email
+    await sendOTPEmail(email, otp);
+
+    res.json({ message: 'New OTP sent to your email' });
+};
+
 // verify OTP for password reset
 exports.verifyOTP = async (req, res) => {
     const { email, otp } = req.body;

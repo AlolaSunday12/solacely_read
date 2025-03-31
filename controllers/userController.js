@@ -29,9 +29,31 @@ exports.getUserProfile = async (req, res) => {
     }
 };
 
+exports.getUserById = async (req, res) => {
+    try {
+        const { id } = req.params; // Get user ID from request parameters
+
+        const user = await User.findByPk(id, {
+            attributes: { exclude: ['password', 'otp', 'otpExpires'] } // Exclude sensitive data
+        });
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found." });
+        }
+
+        res.json(user);
+    } catch (error) {
+        console.error("Error fetching user:", error);
+        res.status(500).json({ message: "Server error.", error: error.message });
+    }
+};
+
+
 exports.getAllUsers = async (req, res) => {
     try {
-        const users = await User.findAll(); // Fetch all users from the database
+        const users = await User.findAll({
+            attributes: ['id', 'username', 'email', 'thumbnail']
+        })
         res.status(200).json(users);
     } catch (error) {
         console.error('Error fetching users:', error);
@@ -49,6 +71,11 @@ exports.getAllUsers = async (req, res) => {
 
         if (!user) {
             return res.status(404).json({ message: "User not found" });
+        }
+
+         // Ensure only the user can update the profile
+         if (req.user.id !== user.id) {
+            return res.status(403).json({ message: "Unauthorized to update this profile" });
         }
 
         let thumbnailPath;

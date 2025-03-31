@@ -3,6 +3,7 @@ const passport = require('passport');
 const authController = require('../controllers/authController');
 const authCheck = require('../middleware/authMiddleware')
 const router = express.Router();
+const sendOTPEmail = require('../utils/sendEmail')
 
 // Local authentication
 router.post('/signup', authController.signup);

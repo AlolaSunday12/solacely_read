@@ -1,6 +1,14 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db'); // Import the sequelize instance
 
+const Category = {
+  NONE: 'None',
+  ALPHA: 'Alpha',
+  BRAVO: 'Bravo',
+  CHARLIE: 'Charlie',
+  DELTA: 'Delta',
+};
+
 // Define the User model
 const User = sequelize.define('User', {
   username: {
@@ -59,6 +67,11 @@ const User = sequelize.define('User', {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false, // Set default to false
+  },
+  category: {
+    type: DataTypes.ENUM(...Object.values(Category)), // Store category as an ENUM
+    allowNull: false,
+    defaultValue: Category.NONE, // Default category
   }
 
 }, {
@@ -74,4 +87,4 @@ const User = sequelize.define('User', {
   
 });
 
-module.exports = User;
+module.exports = { User, Category };

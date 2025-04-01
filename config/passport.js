@@ -1,5 +1,5 @@
 const passport = require('passport');
-const User = require('../models/user'); // Adjust path based on your project structure
+const { User } = require('../models/user'); // Adjust path based on your project structure
 
 // Import authentication strategies
 require('./googleStrategy');

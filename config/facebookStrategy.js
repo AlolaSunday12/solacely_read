@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
-const User = require('../models/user');
+const { User } = require('../models/user');
 //const keys = require('./keys');
 
 require('dotenv').config();

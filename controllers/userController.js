@@ -2,10 +2,8 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const User = require('../models/user');
+const { User, Category } = require('../models/user');
 //const bcrypt = require('bcrypt');
-
-
 
 
 exports.getUserProfile = async (req, res) => {
@@ -66,7 +64,7 @@ exports.getAllUsers = async (req, res) => {
   exports.updateProfile = async (req, res) => {
     try {
         const userId = req.user.id;
-        const { username, email } = req.body;
+        const { username, email, category } = req.body;
         let user = await User.findByPk(userId);
 
         if (!user) {
@@ -89,6 +87,14 @@ exports.getAllUsers = async (req, res) => {
         if (username) user.username = username;
         if (email) user.email = email;
         if (thumbnailPath) user.thumbnail = thumbnailPath;
+
+        // Validate and update category
+        if (category) {
+            if (!Object.values(Category).includes(category)) {
+                return res.status(400).json({ message: "Invalid category" });
+            }
+            user.category = category;
+        }
 
         await user.save();
 

@@ -3,7 +3,6 @@ const router = express.Router();
 const passport = require('passport');
 const { User } = require('../models/user');
 const bcrypt = require('bcryptjs')
-//const { sendOTPEmail } = require('../config/otp');
 const crypto = require('crypto');
 const authCheck = require('../middleware/authMiddleware')
 const {sendOTPEmail} = require('../utils/sendEmail')

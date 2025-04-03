@@ -11,13 +11,12 @@ const Category = {
 
 // Define the User model
 const User = sequelize.define('User', {
-  /*
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
-  */
+  
   username: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -93,5 +92,12 @@ const User = sequelize.define('User', {
   ],
   
 });
-
+/*
+User.findAll().then(users => {
+  users.forEach(user => {
+    user.id = DataTypes.UUIDV4;
+    user.save();
+  })
+})
+*/
 module.exports = { User, Category };

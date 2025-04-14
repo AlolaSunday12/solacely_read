@@ -9,15 +9,15 @@ const router = express.Router();
 
 
 router.put('/updateProfile/:id', authCheck, upload.single('thumbnail'), userController.updateProfile);
-router.get('/getAllUsers', authCheck, userController.getAllUsers);
-router.get('/Profile', authCheck, userController.getUserProfile);
+router.get('/', userController.getAllUsers);
+router.get('/profile', authCheck, userController.getUserProfile);
 router.get('/:id',authCheck, userController.getUserById);
 router.delete('/:id', authCheck, userController.deleteUser);
-
+/*
 // Protect the home route by ensuring the user is authenticated
-router.get('/', authCheck, (req, res) => {
+router.get('/session', authCheck, (req, res) => {
     console.log('User in session:', req.user);
     res.status(200).send({ user: req.user });
 });
-
+*/
 module.exports = router;

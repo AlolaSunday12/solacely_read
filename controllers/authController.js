@@ -81,7 +81,7 @@ exports.logout = (req, res, next) => {
 
             // Clear the session cookie
             res.clearCookie('connect.sid'); // Adjust this if you're using a custom session cookie name
-            res.redirect('/'); // Redirect to the homepage after logout
+            res.status(200).json({ message: 'Logged out successfully' });
         });
     });
 };

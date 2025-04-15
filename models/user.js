@@ -9,6 +9,11 @@ const Category = {
   DELTA: 'Delta',
 };
 
+const Status = {
+  ACTIVE: 'Active',
+  RETIRED: 'Retired',
+};
+
 // Define the User model
 const User = sequelize.define('User', {
   id: {
@@ -78,6 +83,11 @@ const User = sequelize.define('User', {
     type: DataTypes.ENUM(...Object.values(Category)), // Store category as an ENUM
     allowNull: false,
     defaultValue: Category.NONE, // Default category
+  },
+  status: {
+    type: DataTypes.ENUM(...Object.values(Status)),
+    allowNull: false,
+    defaultValue: Status.ACTIVE,
   }
 
 }, {
@@ -100,4 +110,4 @@ User.findAll().then(users => {
   })
 })
 */
-module.exports = { User, Category };
+module.exports = { User, Category, Status };

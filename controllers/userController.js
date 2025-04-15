@@ -49,7 +49,7 @@ exports.getUserById = async (req, res) => {
 exports.getAllUsers = async (req, res) => {
     try {
         const users = await User.findAll({
-            attributes: ['id', 'username', 'email', 'thumbnail']
+            attributes: ['id', 'username', 'email', 'thumbnail', 'category', 'status']
         })
         res.status(200).json(users);
     } catch (error) {
@@ -63,7 +63,7 @@ exports.getAllUsers = async (req, res) => {
   exports.updateProfile = async (req, res) => {
     try {
         const userId = req.user.id;
-        const { username, email, category } = req.body;
+        const { username, email, category, status } = req.body;
         let user = await User.findByPk(userId);
 
         if (!user) {
@@ -86,6 +86,7 @@ exports.getAllUsers = async (req, res) => {
         if (username) user.username = username;
         if (email) user.email = email;
         if (thumbnailPath) user.thumbnail = thumbnailPath;
+        if (typeof status !== 'undefined') user.status = status;
 
         // Validate and update category
         if (category) {

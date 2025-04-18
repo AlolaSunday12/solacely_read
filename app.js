@@ -5,6 +5,7 @@ const cors = require('cors');
 const sequelize = require('./config/db');  // Sequelize instance
 const authRoute = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const commentRoutes = require('./routes/commentRoutes')
 const authCheck = require('./middleware/authMiddleware')
 const User = require('./models/user')
 const multer = require('multer');
@@ -63,8 +64,9 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/auth', authRoute);
-app.use('/profile', authRoute);
+//app.use('/profile', authRoute);
 app.use('/', userRoutes);
+app.use('/comment', commentRoutes);
 //app.use('/contributions', require('./routes/contributionRoutes'));
 //app.use('/payments', require('./routes/paymentRoutes'));
 

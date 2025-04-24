@@ -109,9 +109,13 @@ exports.sendOTP = async (req, res) => {
     await user.update({ otp, otpExpires });
 
     // Send OTP via email
-    await sendOTPEmail(email, otp);
-
-    res.json({ message: 'OTP sent to your email for password reset' });
+    try {
+        await sendOTPEmail(email, otp);
+        res.json({ message: 'OTP sent to your email for password reset' });
+      } catch (err) {
+        console.error('Failed to send OTP email:', err);
+        res.status(500).json({ message: 'Failed to send OTP email' });
+      }
 };
 
 exports.resendOTP = async (req, res) => {
